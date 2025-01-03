@@ -28,6 +28,7 @@
 !*.md
 
 # config
+!*.lock
 !*.toml
 !*.ini
 !.python-version

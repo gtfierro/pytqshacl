@@ -1,0 +1,22 @@
+[project]
+name = "topquadrant"
+dynamic = [ 'version']
+description = "Python wrapper around TopQuadrant SHACL processor"
+authors = [
+    { name = "Majid alDosari", email = "majid.aldosari@pnnl.gov" },
+    { name = "Majid alDosari", email = "majidaldosari-github@yahoo.com" }
+]
+dependencies = ["fire"]
+readme = "README.md"
+
+[dependency-groups]
+dev = [
+    "ipython", "ipdb",
+    "fire",
+    ]
+
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+

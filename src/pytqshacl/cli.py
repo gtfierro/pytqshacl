@@ -1,7 +1,7 @@
 from pathlib import Path
 def printerrs(s):
     if (s.returncode != 0):
-        print('ERRORS')
+        print('ERRORS: process did not exit with 0')
         print(s.stderr)
     return s.stdout
 

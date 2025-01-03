@@ -6,16 +6,20 @@ authors = [
     { name = "Majid alDosari", email = "majid.aldosari@pnnl.gov" },
     { name = "Majid alDosari", email = "majidaldosari-github@yahoo.com" }
 ]
-dependencies = ["fire", "install-jdk"]
+dependencies = ["install-jdk"]
 readme = "README.md"
+[project.optional-dependencies]
+cli = ['fire']
+[project.scripts]
+pytqshacl = "pytqshacl:cli"
 
 [dependency-groups]
 dev = [
     'pre-commit',
     "ipython", "ipdb",
     "fire",
+    "pytqshacl[cli]"
     ]
-
 
 [build-system]
 requires = ["hatchling"]
@@ -25,6 +29,8 @@ path = "src/pytqshacl/__init__.py"
 [tool.hatch.build.targets.sdist]
 include = [
     'src/**/*.py',
-    # run time install
-    # otherwise would have to include .java, .properties, .jars
+    # run time install 
+    #'src/**/*.jar',
+    #'src/**/*.java',
+    #'src/**/*.properties',
     ]

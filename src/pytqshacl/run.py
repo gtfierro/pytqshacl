@@ -3,20 +3,21 @@ from typing import Literal
 
 def env():
     from os import environ
-    from .topquadrant.install import ShaclInstallation
-    si = ShaclInstallation()
+    from .topquadrant.install import Shacl
+    si = Shacl()
     return {**environ,
         'SHACL_HOME': str(si.home),
         'SHACL_CP': f"{si.lib}/*", # need a star for some reason
         'LOGGING': str(si.logging),
           }
 
+NOTSET = object()
 def tryenv(k):
     # ugly
     try:
         return env()[k]
     except:
-        return 'NOTSET'
+        return NOTSET
 
 def cmd(
         cmd:Literal['validate']|Literal['infer'],
@@ -24,23 +25,25 @@ def cmd(
         shapesfile: Path=None,
         shacl_cp=tryenv('SHACL_CP'), jvm_args='', logging=tryenv('LOGGING'),
         ):
-    """command passed to java to run topquadrant shacl"""
-    if (shacl_cp == 'NOTSET') or (logging == 'NOTSET'):
-        raise ValueError("shacl_cp or logging not set")
-
+    """command passed to java to run topquadrant shacl."""
     assert(cmd in {'validate', 'infer'})
+    if (shacl_cp == NOTSET) or (logging == NOTSET):
+        raise EnvironmentError("shacl_cp or logging not set")
+    
     logging = f"-Dlog4j.configurationFile={logging}" if logging else ''
     # class path
     # quote so no funny shell parsing happens (on linux)
     shacl_cp = f"-cp \"{shacl_cp}\"" 
     cmd = cmd[0].upper()+cmd[1:]
-    cmd = f"java {jvm_args} {logging} {shacl_cp} org.topbraid.shacl.tools.{cmd}"
+    from .topquadrant.install import Java
+    java = Java.get()
+    cmd = f"{java} {jvm_args} {logging} {shacl_cp} org.topbraid.shacl.tools.{cmd}"
     _ = f"{cmd} -datafile {datafile} "
     if shapesfile:
         _ = _+f"-shapesfile {shapesfile}"
     return _
 
-import logging 
+import logging
 logger = logging.getLogger('topquadrant')
 def check_proc_manually(cmd, proc):
     # further guard to fail
@@ -79,36 +82,3 @@ def infer(data: Path, shapes:Path=None):
             capture_output=True, text=True )
     _ = check_proc_manually(c, _)
     return _
-
-
-if __name__ == '__main__':
-    from fire import Fire
-    def printerrs(s):
-        if (s.returncode != 0):
-            print('ERRORS')
-            print(s.stderr)
-        return s.stdout
-    def cinfer(data: Path, shapes:Path=None, out=Path('shacl-infer.ttl')):
-        data = Path(data)
-        shapes = Path(shapes)
-        data = (data.as_posix())
-        shapes = (shapes.as_posix())
-        _ = infer(data, shapes)
-        _ = printerrs(_)
-        open(out, 'w').write(_)
-        return out
-    def cvalidate(data: Path, shapes:Path=None, out=Path('shacl-validate.ttl')):
-        data = Path(data)
-        shapes = Path(shapes)
-        data = (data.as_posix())
-        shapes = (shapes.as_posix())
-        _ = validate(data, shapes)
-        _ = printerrs(_)
-        open(out, 'w').write(_)
-        return out
-
-    Fire({
-        'cmd': cmd,
-        'validate': cvalidate,
-        'infer': cinfer
-    })

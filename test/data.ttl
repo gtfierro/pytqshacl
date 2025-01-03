@@ -1,0 +1,4 @@
+
+<https://example.com/John-Doe> <http://schema.org/name> "John", "Johnny" ;
+	<http://schema.org/age> 18 ;
+	a <http://schema.org/Person> .

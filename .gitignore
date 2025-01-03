@@ -20,6 +20,9 @@
 # !*.jar
 # !*.java
 #!*.properties
+#test
+!test/data.ttl
+!test/shapes.ttl
 
 # doc src
 !*.md

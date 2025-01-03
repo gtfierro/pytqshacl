@@ -1,28 +1,49 @@
 
-def get_java():
-    import shutil
-    path = shutil.which("java")
-    return path
-
 class Java:
+    @staticmethod
+    def get_existing_java():
+        import shutil
+        path = shutil.which("java")
+        return path
+    
+    @classmethod
+    def get(cls):
+        _ = cls.get_existing_java()
+        if _: return _
+        else:
+            _ = cls()
+
+
     def __init__(self, ver='21', jre=True):
         self.ver = ver
         self.jre = jre
         self.install(ver, jre)
     
     def install(self, ver: str, jre: bool):
-        if not self.dir():
+        if not self.dir:
             import jdk
             print('installing java')
             jdk.install(ver, jre=jre)
 
     from pathlib import Path
     base = Path.home() / '.jre'
+    @property
     def dir(self):
         for d in self.base.iterdir():
             if d.is_dir():
                 if f'jdk-{self.ver}' in str(d):
                     return d
+    @property
+    def bin(self):
+        dir = self.dir
+        assert(dir)
+        dir = dir / 'bin'
+        j = 'java'
+        fns = [j, f'{j}.exe', f'{j}.sh', ]
+        for f in fns:
+            _ = dir / f
+            if _.exists(): return _
+        raise ProcessLookupError('java not found')
 
 
 from ..config import tqshacl_ver as ver
@@ -34,6 +55,7 @@ class ShaclInstallation:
         gi = (_ / '.gitignore')
         if not gi.exists():
             gi.touch()
+            # ignore everything
             open(gi, 'w').write('*')
 
         self.ver = ver

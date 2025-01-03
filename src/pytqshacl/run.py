@@ -65,20 +65,19 @@ def check_proc_manually(cmd, proc):
     proc.stdout = '\n'.join(_)
     return proc
 
-def validate(data: Path, *, shapes:Path|None=None):
+
+def common(cmdnm, data, shapes):
+    c = cmd(cmdnm, data, shapes)
     from subprocess import run
-    c = cmd('validate', data, shapes)
     _ = run(
             c, check=False, env=env(), shell=True,
             capture_output=True, text=True )
     _ = check_proc_manually(c, _)
     return _
 
+def validate(data: Path, *, shapes:Path|None=None):
+    _ = common('validate', data, shapes)
+    return _
 def infer(data: Path, *, shapes:Path|None=None):
-    from subprocess import run
-    c = cmd('infer', data, shapes)
-    _ = run(
-            c, check=False, env=env(), shell=True,
-            capture_output=True, text=True )
-    _ = check_proc_manually(c, _)
+    _ = common('infer', data, shapes)
     return _

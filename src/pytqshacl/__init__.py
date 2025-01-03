@@ -1,4 +1,4 @@
-__version__ = "102"
+__version__ = "103"
 from .topquadrant import ver as tq_ver
 topquadrant_version = tq_ver
 from .topquadrant.install import Java, Shacl

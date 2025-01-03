@@ -1,10 +1,7 @@
-
-
 def get_java():
     import shutil
     path = shutil.which("java")
     return path
-
 
 def check_java():
     j = get_java()
@@ -13,13 +10,17 @@ def check_java():
     else:
         return j
 
-ver = '1.4.2'
+from ..config import tqshacl_ver as ver
 from pathlib import Path
 class ShaclInstallation:
     def __init__(self, ver=ver, overwrite=False) -> None:
-        from project import root
-        _ = root / 'topquadrant' / 'shacl'
+        _ = Path(__file__).parent / 'src' # could go under install-jdk
         self.dir = self.download_shacl(ver, _ / f'shacl-{ver}' , overwrite=overwrite)
+        gi = (_ / '.gitignore')
+        if not gi.exists():
+            gi.touch()
+            open(gi, 'w').write('*')
+
         self.ver = ver
         assert(self.home.exists())
         assert(self.logging.exists())

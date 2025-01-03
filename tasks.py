@@ -33,4 +33,5 @@ def chk_ver(rev=rev):
 
 if __name__ == '__main__':
     from fire import Fire
-    Fire({f.__name__:f for f in {build, chk_ver}})
+    _ = {f.__name__:f for f in {build, chk_ver, }}
+    Fire(_)

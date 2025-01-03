@@ -1,5 +1,5 @@
 [project]
-name = "topquadrant"
+name = "pytqshacl"
 dynamic = [ 'version']
 description = "Python wrapper around TopQuadrant SHACL processor"
 authors = [
@@ -19,4 +19,11 @@ dev = [
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
-
+[tool.hatch.version]
+path = "src/pytqshacl/__init__.py"
+[tool.hatch.build.targets.sdist]
+include = [
+    'src/**/*.py',
+    # run time install
+    # otherwise would have to include .java, .properties, .jars
+    ]

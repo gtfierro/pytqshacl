@@ -12,9 +12,14 @@
 !.gitignore
 
 # scripts and progs
-!*.java
 !*.py
-!*.md
+
+# topquadrant
+# !*.sh
+# !*.bat
+# !*.jar
+# !*.java
+#!*.properties
 
 # doc src
 !*.md

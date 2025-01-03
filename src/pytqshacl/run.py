@@ -3,7 +3,7 @@ from typing import Literal
 
 def env():
     from os import environ
-    from .install import ShaclInstallation
+    from .topquadrant.install import ShaclInstallation
     si = ShaclInstallation()
     return {**environ,
         'SHACL_HOME': str(si.home),

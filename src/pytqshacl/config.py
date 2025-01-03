@@ -1,10 +1,7 @@
-def config():
-    from .install import check_java
-    check_java()
-    from .install import ShaclInstallation
-    ShaclInstallation()
-
-
-if __name__ == '__main__':
-    from fire import Fire
-    Fire(config)
+from os import environ as env
+envvar = 'PTS_TQ_VER'
+if envvar not in env:
+    tqshacl_ver = '1.4.2'
+else:
+    tqshacl_ver = env[envvar]
+assert(len(tqshacl_ver.split('.')) == 3)

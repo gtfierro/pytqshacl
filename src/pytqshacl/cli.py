@@ -1,4 +1,3 @@
-from fire import Fire
 from pathlib import Path
 def printerrs(s):
     if (s.returncode != 0):
@@ -43,5 +42,6 @@ def validate(
 
 
 from .run import cmd
+from fire import Fire
 Fire({f.__name__:f for f in {cmd, validate, infer}})
 exit(0)

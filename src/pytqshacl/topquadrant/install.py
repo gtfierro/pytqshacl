@@ -48,7 +48,7 @@ class Java:
         assert(dir)
         dir = dir / 'bin'
         j = 'java'
-        fns = [j, f'{j}.exe', f'{j}.sh', ]
+        fns = [j, f'{j}.exe', f'{j}.sh', f'{j}.bat' ]
         for f in fns:
             _ = dir / f
             if _.exists(): return _

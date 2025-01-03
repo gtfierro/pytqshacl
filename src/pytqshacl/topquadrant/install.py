@@ -18,7 +18,7 @@ class Java:
     class defaults:
         ver = '21'
         jre = True
-    def __init__(self, ver=defaults.ver, jre=defaults.jre):
+    def __init__(self, ver: str=defaults.ver, jre: bool=defaults.jre):
         self.ver = ver
         self.jre = jre
         self.install(ver, jre)
@@ -29,7 +29,11 @@ class Java:
             print('installing java')
             jdk.install(ver, jre=jre)
 
-    base = Path.home() / '.jre'
+    
+    @property
+    def base(self):
+        if self.jre:    return Path.home() / '.jre'
+        else:           return Path.home() / '.jdk'
     @property
     def dir(self):
         if not self.base.exists():

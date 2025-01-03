@@ -7,12 +7,11 @@ class Java:
         return path
     
     @classmethod
-    def get(cls):
+    def get(cls, use_existing=True):
         _ = cls.get_existing_java()
-        if _: return _
+        if _ and use_existing: return _
         else:
-            _ = cls()
-
+            return cls().bin
 
     def __init__(self, ver='21', jre=True):
         self.ver = ver

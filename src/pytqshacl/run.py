@@ -65,7 +65,7 @@ def check_proc_manually(cmd, proc):
     proc.stdout = '\n'.join(_)
     return proc
 
-def validate(data: Path, shapes:Path|None=None):
+def validate(data: Path, *, shapes:Path|None=None):
     from subprocess import run
     c = cmd('validate', data, shapes)
     _ = run(
@@ -74,7 +74,7 @@ def validate(data: Path, shapes:Path|None=None):
     _ = check_proc_manually(c, _)
     return _
 
-def infer(data: Path, shapes:Path|None=None):
+def infer(data: Path, *, shapes:Path|None=None):
     from subprocess import run
     c = cmd('infer', data, shapes)
     _ = run(

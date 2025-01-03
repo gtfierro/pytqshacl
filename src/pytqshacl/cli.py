@@ -15,7 +15,7 @@ def common(  cmd,
     assert(cmd in {'infer', 'validate'})
     if cmd == 'infer': from     .run import infer       as f
     if cmd == 'validate': from  .run import validate    as f
-    _ = f(data, shapes)
+    _ = f(data, shapes=shapes)
     rc = _.returncode
     _ = printerrs(_)
     if out is not None:

@@ -15,7 +15,10 @@ class Java:
         else:
             return cls().bin
 
-    def __init__(self, ver='21', jre=True):
+    class defaults:
+        ver = '21'
+        jre = True
+    def __init__(self, ver=defaults.ver, jre=defaults.jre):
         self.ver = ver
         self.jre = jre
         self.install(ver, jre)

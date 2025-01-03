@@ -32,6 +32,8 @@ class Java:
     base = Path.home() / '.jre'
     @property
     def dir(self):
+        if not self.base.exists():
+            return
         for d in self.base.iterdir():
             if d.is_dir():
                 if f'jdk-{self.ver}' in str(d):

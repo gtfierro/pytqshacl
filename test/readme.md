@@ -1,3 +1,5 @@
+# CLI
+
 Run `pytqshacl  validate data.ttl --shapes shapes.ttl --out None`.
 It should print:
 ```
@@ -24,3 +26,7 @@ It should print:
                ]
 ] .
 ```
+
+# pytest
+
+Just run `pytest` in the [test dir](.).

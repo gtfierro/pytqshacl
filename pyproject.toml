@@ -15,6 +15,7 @@ pytqshacl = "pytqshacl:cli"
 
 [dependency-groups]
 dev = [
+    'pytest',
     'pre-commit',
     "ipython", "ipdb",
     "fire",

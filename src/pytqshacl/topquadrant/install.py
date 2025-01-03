@@ -47,7 +47,7 @@ class Java:
 
 from ..config import tqshacl_ver as ver
 from pathlib import Path
-class ShaclInstallation:
+class Shacl:
     def __init__(self, ver=ver, overwrite=False) -> None:
         _ = Path(__file__).parent / 'src' # could go under java.home
         self.dir = self.download_shacl(ver, _ / f'shacl-{ver}' , overwrite=overwrite)

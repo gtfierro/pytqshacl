@@ -1,41 +1,27 @@
+
 def get_java():
     import shutil
     path = shutil.which("java")
     return path
 
-def check_java():
-    j = get_java()
-    if not j:
-        raise ProcessLookupError('java not found. install it for your system.')
-    else:
-        return j
-
-def java():
-    if not get_java():
-        print('installing java')
-        import jdk
-        jdk.install('21', jre=True)
-
 class Java:
-    ver = '21'
-    jre = True
-
-    def __init__(self, ver=ver, jre=jre):
+    def __init__(self, ver='21', jre=True):
+        self.ver = ver
+        self.jre = jre
         self.install(ver, jre)
-    @classmethod
-    def install(cls, ver: str, jre: bool):
-        if not cls.home():
+    
+    def install(self, ver: str, jre: bool):
+        if not self.dir():
             import jdk
             print('installing java')
             jdk.install(ver, jre=jre)
 
-    @classmethod
-    def home(cls):
-        from pathlib import Path
-        _ = Path.home() / '.jre'
-        for d in _.iterdir():
+    from pathlib import Path
+    base = Path.home() / '.jre'
+    def dir(self):
+        for d in self.base.iterdir():
             if d.is_dir():
-                if f'jdk-{cls.ver}' in str(d):
+                if f'jdk-{self.ver}' in str(d):
                     return d
 
 

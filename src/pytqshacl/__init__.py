@@ -1,4 +1,4 @@
-__version__ = "95"
+__version__ = "96"
 from .topquadrant import ver as tq_ver
 topquadrant_version = tq_ver
 

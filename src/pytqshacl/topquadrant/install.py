@@ -1,3 +1,4 @@
+from pathlib import Path
 
 class Java:
     @staticmethod
@@ -24,7 +25,6 @@ class Java:
             print('installing java')
             jdk.install(ver, jre=jre)
 
-    from pathlib import Path
     base = Path.home() / '.jre'
     @property
     def dir(self):
@@ -46,7 +46,6 @@ class Java:
 
 
 from ..config import tqshacl_ver as ver
-from pathlib import Path
 class Shacl:
     def __init__(self, ver=ver, overwrite=False) -> None:
         _ = Path(__file__).parent / 'src' # could go under java.home

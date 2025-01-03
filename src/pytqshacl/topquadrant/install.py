@@ -7,8 +7,9 @@ class Java:
         path = shutil.which("java")
         return path
     
+    from ..config import prefer_sysjava
     @classmethod
-    def get(cls, use_existing=True):
+    def get(cls, use_existing=prefer_sysjava):
         _ = cls.get_existing_java()
         if _ and use_existing: return _
         else:

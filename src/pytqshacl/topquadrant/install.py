@@ -67,10 +67,9 @@ class Shacl:
             open(gi, 'w').write('*')
 
         self.ver = ver
-        assert(self.home.exists())
+        assert(self.home.   exists())
         assert(self.logging.exists())
-        assert(self.lib.exists())
-    
+        assert(self.lib.    exists())
 
     @staticmethod
     def download_shacl(ver, dir, overwrite=False) -> Path:
@@ -95,9 +94,6 @@ class Shacl:
     @property
     def logging(self) -> Path:
         return self.home / "log4j2.properties"
-    @property
-    def bin(self) -> Path:
-        return self.home / 'bin'
     @property
     def lib(self) -> Path:
         return self.home / 'lib'

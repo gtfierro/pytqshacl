@@ -6,7 +6,7 @@ authors = [
     { name = "Majid alDosari", email = "majid.aldosari@pnnl.gov" },
     { name = "Majid alDosari", email = "majidaldosari-github@yahoo.com" }
 ]
-dependencies = ["fire"]
+dependencies = ["fire", "install-jdk"]
 readme = "README.md"
 
 [dependency-groups]

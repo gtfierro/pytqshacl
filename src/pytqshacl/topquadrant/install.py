@@ -6,15 +6,44 @@ def get_java():
 def check_java():
     j = get_java()
     if not j:
-        raise ProcessLookupError('java not found. install it for your system')
+        raise ProcessLookupError('java not found. install it for your system.')
     else:
         return j
+
+def java():
+    if not get_java():
+        print('installing java')
+        import jdk
+        jdk.install('21', jre=True)
+
+class Java:
+    ver = '21'
+    jre = True
+
+    def __init__(self, ver=ver, jre=jre):
+        self.install(ver, jre)
+    @classmethod
+    def install(cls, ver: str, jre: bool):
+        if not cls.home():
+            import jdk
+            print('installing java')
+            jdk.install(ver, jre=jre)
+
+    @classmethod
+    def home(cls):
+        from pathlib import Path
+        _ = Path.home() / '.jre'
+        for d in _.iterdir():
+            if d.is_dir():
+                if f'jdk-{cls.ver}' in str(d):
+                    return d
+
 
 from ..config import tqshacl_ver as ver
 from pathlib import Path
 class ShaclInstallation:
     def __init__(self, ver=ver, overwrite=False) -> None:
-        _ = Path(__file__).parent / 'src' # could go under install-jdk
+        _ = Path(__file__).parent / 'src' # could go under java.home
         self.dir = self.download_shacl(ver, _ / f'shacl-{ver}' , overwrite=overwrite)
         gi = (_ / '.gitignore')
         if not gi.exists():
@@ -25,6 +54,7 @@ class ShaclInstallation:
         assert(self.home.exists())
         assert(self.logging.exists())
         assert(self.lib.exists())
+    
 
     @staticmethod
     def download_shacl(ver, dir, overwrite=False) -> Path:

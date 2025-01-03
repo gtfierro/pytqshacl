@@ -21,8 +21,8 @@ def common(  cmd,
     data = (data.as_posix())
     shapes = (shapes.as_posix())
     assert(cmd in {'infer', 'validate'})
-    if cmd == 'infer': from .run import infer as f
-    if cmd == 'validate': from .run import infer as f
+    if cmd == 'infer': from     .run import infer       as f
+    if cmd == 'validate': from  .run import validate    as f
     _ = f(data, shapes)
     rc = _.returncode
     _ = printerrs(_)

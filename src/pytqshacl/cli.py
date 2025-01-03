@@ -6,12 +6,6 @@ def printerrs(s):
         print(s.stderr)
     return s.stdout
 
-class defaults:
-    data =      Path('data.ttl')
-    shapes =    Path('shapes.ttl')
-    # better than None bc stdout could be mixed with errors
-    out =       Path('out.ttl')
-
 def common(  cmd,
         data,
         shapes,
@@ -31,6 +25,11 @@ def common(  cmd,
     else:
         return _
 
+class defaults:
+    data =      Path('data.ttl')
+    shapes =    Path('shapes.ttl')
+    # better than None bc stdout could be mixed with errors/warnings
+    out =       Path('out.ttl')
 def infer(
         data: Path      =defaults.data,
         shapes:Path     =defaults.shapes,

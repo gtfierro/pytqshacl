@@ -287,7 +287,7 @@ wheels = [
 
 [[package]]
 name = "pytqshacl"
-version = "105"
+version = "106"
 source = { editable = "." }
 dependencies = [
     { name = "install-jdk" },

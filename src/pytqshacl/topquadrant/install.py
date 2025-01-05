@@ -9,11 +9,12 @@ class Java:
     
     from ..config import prefer_sysjava
     @classmethod
-    def get(cls, use_existing=prefer_sysjava):
-        _ = cls.get_existing_java()
-        if _ and use_existing: return _
+    def get(cls, *, prefer_existing=prefer_sysjava, **kw):
+        if prefer_existing:
+            ej = cls.get_existing_java()
+            if ej: return ej
         else:
-            return cls().bin
+            return cls(**kw).bin
 
     class defaults:
         ver = '21'

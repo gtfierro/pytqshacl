@@ -3,7 +3,10 @@ pkg = 'pytqshacl'
 def get_rev():
     from subprocess import check_output as run
     return run('git rev-parse --abbrev-ref HEAD', text=True).strip()
-rev = get_rev()
+try:
+    rev = get_rev()
+except FileNotFoundError: # no git in cicd maybe
+    rev = '{NO GIT}' # 
 
 
 def build(commit=False):

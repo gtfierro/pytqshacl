@@ -16,6 +16,9 @@ def build(commit=False):
         run(f'uv lock --upgrade-package {pkg}', )
         # https://github.com/pre-commit/pre-commit/issues/747#issuecomment-386782080
         run('git add -u', )
+    # download shacl
+    from pytqshacl.topquadrant.install import Shacl
+    Shacl()
     run('uv build')
 
 

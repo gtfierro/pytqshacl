@@ -22,7 +22,6 @@ dev = [
     "ipython", "ipdb",
     "fire",
     "pytqshacl[cli]",
-    'certifi',
     ]
 
 [build-system]

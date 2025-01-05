@@ -11,15 +11,6 @@ wheels = [
 ]
 
 [[package]]
-name = "certifi"
-version = "2024.12.14"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/0f/bd/1d41ee578ce09523c81a15426705dd20969f5abf006d1afe8aeff0dd776a/certifi-2024.12.14.tar.gz", hash = "sha256:b650d30f370c2b724812bee08008be0c4163b163ddaec3f2546c1caf65f191db", size = 166010 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/a5/32/8f6669fc4798494966bf446c8c4a162e0b5d893dff088afddf76414f70e1/certifi-2024.12.14-py3-none-any.whl", hash = "sha256:1275f7a45be9464efc1173084eaa30f866fe2e47d389406136d332ed4967ec56", size = 164927 },
-]
-
-[[package]]
 name = "cfgv"
 version = "3.4.0"
 source = { registry = "https://pypi.org/simple" }
@@ -296,7 +287,7 @@ wheels = [
 
 [[package]]
 name = "pytqshacl"
-version = "120"
+version = "121"
 source = { editable = "." }
 
 [package.optional-dependencies]
@@ -309,7 +300,6 @@ java = [
 
 [package.dev-dependencies]
 dev = [
-    { name = "certifi" },
     { name = "fire" },
     { name = "ipdb" },
     { name = "ipython" },
@@ -326,7 +316,6 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "certifi" },
     { name = "fire" },
     { name = "ipdb" },
     { name = "ipython" },

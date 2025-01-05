@@ -63,7 +63,7 @@ class Java:
 from ..config import tqshacl_ver as ver
 class Shacl:
     def __init__(self, ver=ver, overwrite=False) -> None:
-        _ = Path(__file__).parent / 'src' # could go under java.home
+        _ = Path(__file__).parent / 'bin' # could go under java.home
         self.dir = self.download_shacl(ver, _ / f'shacl-{ver}' , overwrite=overwrite)
         gi = (_ / '.gitignore')
         if not gi.exists():

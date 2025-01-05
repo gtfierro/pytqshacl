@@ -39,7 +39,7 @@ class Java:
     def dir(self):
         if not self.base.exists():
             return
-        for d in self.base.iterdir():
+        for d in sorted(self.base.iterdir(), reverse=True,):
             if d.is_dir():
                 if f'jdk-{self.ver}' in str(d):
                     return d

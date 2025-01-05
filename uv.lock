@@ -296,7 +296,7 @@ wheels = [
 
 [[package]]
 name = "pytqshacl"
-version = "119"
+version = "120"
 source = { editable = "." }
 
 [package.optional-dependencies]

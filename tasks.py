@@ -1,11 +1,12 @@
 pkg = 'pytqshacl'
 
+from subprocess import CalledProcessError
 def get_rev():
     from subprocess import check_output as run
     return run('git rev-parse --abbrev-ref HEAD', text=True, shell=True).strip()
 try:
     rev = get_rev()
-except FileNotFoundError: # no git in cicd maybe
+except CalledProcessError: # no git in cicd maybe
     rev = '{NO GIT}' # 
 
 

@@ -81,12 +81,13 @@ class Shacl:
         if dir.exists() and not overwrite:
             return dir
         
-        import urllib.request
-        _ = urllib.request.urlopen(
+        from requests import get
+        _ = get(
             ('https://repo1.maven.org/maven2/org/'
              'topbraid/shacl'
-             f'/{ver}/shacl-{ver}-bin.zip'),  verify=False )
-        _ = _.read()
+             f'/{ver}/shacl-{ver}-bin.zip'),  )
+        _ = _.content
+        assert(isinstance(_, bytes))
         from zipfile import ZipFile
         from io import BytesIO
         _ = ZipFile(BytesIO(_))

@@ -29,4 +29,4 @@ It should print:
 
 # pytest
 
-Just run `pytest` in the [test dir](.).
+Just run `python test.py` in the [test dir](.).

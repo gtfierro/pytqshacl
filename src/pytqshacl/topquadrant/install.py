@@ -26,7 +26,10 @@ class Java:
     
     def install(self, ver: str, jre: bool):
         if not self.dir:
-            import jdk
+            try:
+                import jdk
+            except ModuleNotFoundError:
+                raise ModuleNotFoundError("can't install java. did you intend to install the feature pytqshacl[java]?")
             print('installing java to')
             jdk.install(ver, jre=jre)
             print(str(self.bin))

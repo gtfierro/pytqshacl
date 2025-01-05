@@ -42,6 +42,9 @@ def validate(
 
 
 from .run import cmd
-from fire import Fire
+try:
+    from fire import Fire
+except ModuleNotFoundError:
+    raise ModuleNotFoundError("can't run cli. did you intend to install the feature pytqshacl[cli]?")
 Fire({f.__name__:f for f in {cmd, validate, infer}})
 exit(0)

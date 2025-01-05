@@ -19,7 +19,8 @@ dev = [
     'pre-commit',
     "ipython", "ipdb",
     "fire",
-    "pytqshacl[cli]"
+    "pytqshacl[cli]",
+    'certifi',
     ]
 
 [build-system]

@@ -85,7 +85,7 @@ class Shacl:
         _ = urllib.request.urlopen(
             ('https://repo1.maven.org/maven2/org/'
              'topbraid/shacl'
-             f'/{ver}/shacl-{ver}-bin.zip'))
+             f'/{ver}/shacl-{ver}-bin.zip'),  verify=False )
         _ = _.read()
         from zipfile import ZipFile
         from io import BytesIO

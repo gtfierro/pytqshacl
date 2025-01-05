@@ -287,15 +287,15 @@ wheels = [
 
 [[package]]
 name = "pytqshacl"
-version = "112"
+version = "113"
 source = { editable = "." }
-dependencies = [
-    { name = "install-jdk" },
-]
 
 [package.optional-dependencies]
 cli = [
     { name = "fire" },
+]
+java = [
+    { name = "install-jdk" },
 ]
 
 [package.dev-dependencies]
@@ -311,7 +311,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "fire", marker = "extra == 'cli'" },
-    { name = "install-jdk" },
+    { name = "install-jdk", marker = "extra == 'java'" },
 ]
 
 [package.metadata.requires-dev]

@@ -6,10 +6,10 @@ authors = [
     { name = "Majid alDosari", email = "majid.aldosari@pnnl.gov" },
     { name = "Majid alDosari", email = "majidaldosari-github@yahoo.com" }
 ]
-dependencies = ["install-jdk"]
 readme = "README.md"
 [project.optional-dependencies]
 cli = ['fire']
+java = ['install-jdk']
 [project.scripts]
 pytqshacl = "pytqshacl:cli"
 

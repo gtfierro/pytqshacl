@@ -2,7 +2,7 @@ pkg = 'pytqshacl'
 
 def get_rev():
     from subprocess import check_output as run
-    return run('git rev-parse --abbrev-ref HEAD', text=True).strip()
+    return run('git rev-parse --abbrev-ref HEAD', text=True, shell=True).strip()
 try:
     rev = get_rev()
 except FileNotFoundError: # no git in cicd maybe
@@ -13,7 +13,7 @@ def build(commit=False):
     def run(cmd, *p, **k):
         from subprocess import check_call as run
         from pathlib import Path
-        return run(cmd, *p, cwd=Path(__file__).parent, **k)
+        return run(cmd, *p, cwd=Path(__file__).parent, shell=True, **k)
     if commit:
         run(f'uvx hatchling version {ncommits()+1}', )
         run(f'uv lock --upgrade-package {pkg}', )
@@ -22,7 +22,7 @@ def build(commit=False):
     # download shacl
     from pytqshacl.topquadrant.install import Shacl
     Shacl()
-    run('uv build')
+    run('uv build', )
 
 
 def ncommits(rev=rev):

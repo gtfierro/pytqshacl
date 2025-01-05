@@ -17,11 +17,9 @@ pytqshacl = "pytqshacl:cli"
 dev = [
     # features
     'pytqshacl[cli, java]',
-    'pytest',
     'pre-commit',
     "ipython", "ipdb",
     "fire",
-    "pytqshacl[cli]",
     ]
 
 [build-system]

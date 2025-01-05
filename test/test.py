@@ -17,3 +17,9 @@ def test_validate():
     from pytqshacl import validate
     _ = validate(data, shapes=shapes)
     assert(_)
+
+
+if __name__ == '__main__':
+    test_infer()
+    test_validate()
+    

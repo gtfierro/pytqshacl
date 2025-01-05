@@ -31,7 +31,7 @@ path = "src/pytqshacl/__init__.py"
 [tool.hatch.build.targets.sdist]
 include = [
     'src/**/*.py',
-    # tq shacl src is ~20mb.
+    # tq shacl bin is ~20mb.
     # can't decide which is better:
     # runtime install vs packaging tq shacl (treating it like src)
     'src/**/*.jar',

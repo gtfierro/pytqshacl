@@ -11,10 +11,9 @@ class Java:
     @classmethod
     def get(cls, *, prefer_existing=prefer_sysjava, **kw):
         if prefer_existing:
-            ej = cls.get_existing_java()
-            if ej: return ej
-        else:
-            return cls(**kw).bin
+            _ = cls.get_existing_java()
+            if _: return _
+        return cls(**kw).bin
 
     class defaults:
         ver = '21'
@@ -22,17 +21,18 @@ class Java:
     def __init__(self, ver: str=defaults.ver, jre: bool=defaults.jre):
         self.ver = ver
         self.jre = jre
-        self.install(ver, jre)
+        self.install()
     
-    def install(self, ver: str, jre: bool):
+    def install(self,):
         if not self.dir:
             try:
                 import jdk
             except ModuleNotFoundError:
                 raise ModuleNotFoundError("can't install java. did you intend to install the feature pytqshacl[java]?")
             print('installing java to')
-            jdk.install(ver, jre=jre)
+            _ = jdk.install(self.ver, jre=self.jre)
             print(str(self.bin))
+            return _
 
     
     @property

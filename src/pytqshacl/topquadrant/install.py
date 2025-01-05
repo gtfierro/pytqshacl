@@ -57,7 +57,7 @@ class Java:
         for f in fns:
             _ = dir / f
             if _.exists(): return _
-        raise ProcessLookupError('java not found')
+        raise FileNotFoundError('java not found')
 
 
 from ..config import tqshacl_ver as ver

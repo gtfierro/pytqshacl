@@ -296,7 +296,7 @@ wheels = [
 
 [[package]]
 name = "pytqshacl"
-version = "118"
+version = "119"
 source = { editable = "." }
 
 [package.optional-dependencies]
@@ -315,7 +315,7 @@ dev = [
     { name = "ipython" },
     { name = "pre-commit" },
     { name = "pytest" },
-    { name = "pytqshacl", extra = ["cli"] },
+    { name = "pytqshacl", extra = ["cli", "java"] },
 ]
 
 [package.metadata]
@@ -333,6 +333,7 @@ dev = [
     { name = "pre-commit" },
     { name = "pytest" },
     { name = "pytqshacl", extras = ["cli"] },
+    { name = "pytqshacl", extras = ["cli", "java"] },
 ]
 
 [[package]]

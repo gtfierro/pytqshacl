@@ -18,8 +18,10 @@ def test_validate():
     _ = validate(data, shapes=shapes)
     assert(_)
 
-
-if __name__ == '__main__':
+def all():
     test_infer()
     test_validate()
+
+if __name__ == '__main__':
+    all()
     

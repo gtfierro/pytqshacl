@@ -38,7 +38,15 @@ def chk_ver(rev=rev):
     return str(v) == str(ncommits(rev=rev))
 
 
+def test():
+    from pathlib import Path
+    tf = Path(__file__).parent / 'test' / 'test.py'
+    assert(tf.exists())
+    from test.test import all
+    all()
+
+
 if __name__ == '__main__':
     from fire import Fire
-    _ = {f.__name__:f for f in {build, chk_ver, }}
+    _ = {f.__name__:f for f in {build, chk_ver, test}}
     Fire(_)

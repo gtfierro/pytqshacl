@@ -37,6 +37,7 @@ def cmd(
     cmd = cmd[0].upper()+cmd[1:]
     from .topquadrant.install import Java
     java = Java.get()
+    assert(java)
     cmd = f"{java} {jvm_args} {logging} {shacl_cp} org.topbraid.shacl.tools.{cmd}"
     _ = f"{cmd} -datafile {datafile} "
     if shapesfile:

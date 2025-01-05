@@ -26,8 +26,9 @@ class Java:
     def install(self, ver: str, jre: bool):
         if not self.dir:
             import jdk
-            print('installing java')
+            print('installing java to')
             jdk.install(ver, jre=jre)
+            print(str(self.bin))
 
     
     @property

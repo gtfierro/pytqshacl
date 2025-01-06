@@ -19,8 +19,11 @@ def test_validate():
     assert(_)
 
 def all():
+    print('testing inference')
     test_infer()
+    print('testing validation')
     test_validate()
+    print('np')
 
 if __name__ == '__main__':
     all()

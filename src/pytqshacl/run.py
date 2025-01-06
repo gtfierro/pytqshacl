@@ -16,7 +16,7 @@ def tryenv(k):
     # ugly
     try:
         return env()[k]
-    except:
+    except KeyError:
         return NOTSET
 
 def cmd(

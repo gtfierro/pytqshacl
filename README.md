@@ -55,7 +55,7 @@ ERRORS: process did not exit with 0
 ] .
 ```
 
-### Lib
+### [Lib](./src/pytqshacl/run.py)
 
 Check the arguments from `validate` and `infer`
 from the imports `from pytqshacl import validate, infer`.

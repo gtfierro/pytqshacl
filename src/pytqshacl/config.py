@@ -2,7 +2,7 @@ from os import environ as env
 pts = 'pytqshacl'
 envvar = f'{pts}_TQ_VER'
 if envvar not in env:
-    tqshacl_ver = '1.4.2'
+    tqshacl_ver = '1.4.3'
 else:
     tqshacl_ver = env[envvar]
 assert(len(tqshacl_ver.split('.')) == 3)

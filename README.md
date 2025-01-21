@@ -7,14 +7,16 @@ Python wrapper around [TopQuadrant's SHACL implementation](https://github.com/To
 ## Why?
 
 Motivation: This was developed as part of [BIM2RDF](https://github.com/PNNL/BIM2RDF)
-where TopQuadrant was used to execute SHACL.
+where TopQuadrant was used to execute [SHACL](https://shacl-playground.zazuko.com/).
 Python's [PySHACL](https://github.com/RDFLib/pySHACL) was too slow.
 Nonetheless, it's useful to be able to integrate it with Python.
 
 
-## Features
-* Java is installed on first use. Note this changes your system. The installation location will be printed.
-* CLI
+## Optional Features
+can be installed as `pytqshacl[java,cli]`.
+* Java: is installed on first use.
+Note this changes your system. The installation location will be printed.
+* CLI: will just wrap the topquadrant invocation with managed configuraion.
 
 ## Usage
 

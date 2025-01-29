@@ -56,15 +56,22 @@ def check_proc_manually(cmd, proc):
         print(proc.stderr, file=stderr)
         raise CalledProcessError(proc.returncode, cmd, stderr=proc.stderr)
     
-    # filter out warnings to ensure valid ttl of stdout
+    # filter out warnings to *hop* valid ttl of stdout
     _ = []
     for l in proc.stdout.split('\n'):
-        if ('warn' and 'riot') in l.lower():
+        ll = l.lower()
+        if      (('warn' and 'riot') in ll) \
+            or  (' WARN ' in l) \
+            or  ('org.apache.jena' in l)\
+            or  ('org.topbraid.shacl' in l):
             logger.warning(l)
         else:
             _.append(l)
-    proc.stdout = '\n'.join(_)
+    proc.stdout = MaybeInvalidTTL('\n'.join(_))
     return proc
+
+
+class MaybeInvalidTTL(str): ...
 
 
 def common(cmdnm, data, shapes):

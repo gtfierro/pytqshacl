@@ -59,17 +59,21 @@ def check_proc_manually(cmd, proc):
     # filter out warnings to *hop* valid ttl of stdout
     _ = []
     for l in proc.stdout.split('\n'):
-        ll = l.lower()
+        ll:str = l.lower().strip()
         if      (('warn' and 'riot') in ll) \
             or  (' WARN ' in l) \
             or  ('org.apache.jena' in l)\
-            or  ('org.topbraid.shacl' in l):
+            or  ('org.topbraid.shacl' in l)\
+            or  ('jdk.' in l)\
+            or  ('java.' in l)\
+            or  (l.startswith('at '))\
+            or  (ll.startswith('caused by'))\
+            or  (ll.startswith('...') and ll.endswith('more')):
             logger.warning(l)
         else:
             _.append(l)
     proc.stdout = MaybeInvalidTTL('\n'.join(_))
     return proc
-
 
 class MaybeInvalidTTL(str): ...
 

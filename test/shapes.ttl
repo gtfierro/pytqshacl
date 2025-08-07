@@ -17,3 +17,22 @@ schema:Person
       sh:minInclusive 18 ;
     ] ;
 .
+
+
+@prefix ex: <http://example.com/> .
+ex:RectangleShape a sh:NodeShape ;
+  sh:targetClass ex:Rectangle ;
+  sh:rule [
+    a sh:SPARQLRule ;
+    sh:prefixes ( [ sh:prefix "ex" ; sh:namespace ex: ] ) ;
+    sh:construct """
+      PREFIX ex: <http://example.com/>
+      CONSTRUCT {
+        ?this ex:area ?area .
+      } WHERE {
+        ?this ex:width ?width ;
+              ex:height ?height .
+        BIND ((?width * ?height) as ?area)
+      }
+    """ ;
+  ] .

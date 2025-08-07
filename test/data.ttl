@@ -1,4 +1,10 @@
+@prefix ex: <http://example.com/> .
 
 <https://example.com/John-Doe> <http://schema.org/name> "John", "Johnny" ;
 	<http://schema.org/age> 18 ;
 	a <http://schema.org/Person> .
+
+
+ex:r a ex:Rectangle.
+ex:r ex:width 3.
+ex:r ex:height 33.

@@ -11,12 +11,12 @@ shapes =    get_pth('shapes.ttl')
 def test_infer():
     from pytqshacl import infer
     _ = infer(data, shapes=shapes)
-    assert(_)
+    assert('99' in _.stdout)
 
 def test_validate():
     from pytqshacl import validate
     _ = validate(data, shapes=shapes)
-    assert(_)
+    assert('ValidationReport' in _.stdout)
 
 def all():
     print('testing inference')

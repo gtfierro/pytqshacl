@@ -57,10 +57,18 @@ ERRORS: process did not exit with 0
 ] .
 ```
 
+You can forward extra TopQuadrant tool flags without dropping to `cmd`:
+
+```
+pytqshacl validate -d data.ttl -s shapes.ttl -shapesGraphName http://example.com/graph
+```
+
 ### [Lib](./src/pytqshacl/run.py)
 
 Check the arguments from `validate` and `infer`
 from the imports `from pytqshacl import validate, infer`.
+Both functions now accept optional `tool_args` (an iterable of strings) that are
+forwarded to the TopQuadrant CLI.
 
 ### [Configuration](./src/pytqshacl/config.py)
 

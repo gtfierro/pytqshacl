@@ -1,5 +1,6 @@
 from pathlib import Path
-from typing import Literal
+from typing import Literal, Sequence
+from shlex import quote
 
 def env():
     from os import environ
@@ -24,6 +25,8 @@ def cmd(
         datafile: Path,
         shapesfile: Path=None,
         shacl_cp=tryenv('SHACL_CP'), jvm_args='', logging=tryenv('LOGGING'),
+        *,
+        tool_args:Sequence[str]|None=None,
         ):
     """command passed to java to run topquadrant shacl."""
     assert(cmd in {'validate', 'infer'})
@@ -33,16 +36,26 @@ def cmd(
     logging = f"-Dlog4j.configurationFile={logging}" if logging else ''
     # class path
     # quote so no funny shell parsing happens (on linux)
-    shacl_cp = f"-cp \"{shacl_cp}\"" 
+    shacl_cp = f"-cp \"{shacl_cp}\""
     cmd = cmd[0].upper()+cmd[1:]
     from .topquadrant.install import Java
     java = Java.get()
     assert(java)
-    cmd = f"{java} {jvm_args} {logging} {shacl_cp} org.topbraid.shacl.tools.{cmd}"
-    _ = f"{cmd} -datafile {datafile} "
+    segments = [
+        java,
+        jvm_args.strip() if jvm_args else '',
+        logging,
+        shacl_cp,
+        f"org.topbraid.shacl.tools.{cmd}",
+        f"-datafile {quote(str(datafile))}",
+    ]
     if shapesfile:
-        _ = _+f"-shapesfile {shapesfile}"
-    return _
+        segments.append(f"-shapesfile {quote(str(shapesfile))}")
+    if tool_args:
+        extra = ' '.join(quote(str(arg)) for arg in tool_args if arg)
+        if extra:
+            segments.append(extra)
+    return ' '.join(part for part in segments if part)
 
 import logging
 logger = logging.getLogger('topquadrant')
@@ -78,8 +91,8 @@ def check_proc_manually(cmd, proc):
 class MaybeInvalidTTL(str): ...
 
 
-def common(cmdnm, data, shapes):
-    c = cmd(cmdnm, data, shapes)
+def common(cmdnm, data, shapes, *, tool_args:Sequence[str]|None=None):
+    c = cmd(cmdnm, data, shapes, tool_args=tool_args)
     from subprocess import run
     _ = run(
             c, check=False, env=env(), shell=True,
@@ -87,9 +100,9 @@ def common(cmdnm, data, shapes):
     _ = check_proc_manually(c, _)
     return _
 
-def validate(data: Path, *, shapes:Path|None=None):
-    _ = common('validate', data, shapes)
+def validate(data: Path, *, shapes:Path|None=None, tool_args:Sequence[str]|None=None):
+    _ = common('validate', data, shapes, tool_args=tool_args)
     return _
-def infer(data: Path, *, shapes:Path|None=None):
-    _ = common('infer', data, shapes)
+def infer(data: Path, *, shapes:Path|None=None, tool_args:Sequence[str]|None=None):
+    _ = common('infer', data, shapes, tool_args=tool_args)
     return _

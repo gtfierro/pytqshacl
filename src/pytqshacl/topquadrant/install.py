@@ -54,9 +54,13 @@ class Java:
         dir = dir / 'bin'
         j = 'java'
         fns = [j, f'{j}.exe', f'{j}.sh', f'{j}.bat' ]
+        print(f"looking for java in {dir}")
         for f in fns:
             _ = dir / f
-            if _.exists(): return _
+            if _.exists():
+                print(f"found java: {str(_)}")
+                return _
+            print(f"not found: {str(_)}")
         raise FileNotFoundError('java not found')
 
 

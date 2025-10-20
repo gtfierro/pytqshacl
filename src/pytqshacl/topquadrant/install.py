@@ -1,4 +1,5 @@
 from pathlib import Path
+import sys
 
 class Java:
     @staticmethod
@@ -54,13 +55,13 @@ class Java:
         dir = dir / 'bin'
         j = 'java'
         fns = [j, f'{j}.exe', f'{j}.sh', f'{j}.bat' ]
-        print(f"looking for java in {dir}")
+        print(f"looking for java in {dir}", file=sys.stderr, flush=True)
         for f in fns:
             _ = dir / f
             if _.exists():
-                print(f"found java: {str(_)}")
+                print(f"found java: {str(_)}", file=sys.stderr, flush=True)
                 return _
-            print(f"not found: {str(_)}")
+            print(f"not found: {str(_)}", file=sys.stderr, flush=True)
         raise FileNotFoundError('java not found')
 
 
